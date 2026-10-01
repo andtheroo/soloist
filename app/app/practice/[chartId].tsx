@@ -13,6 +13,7 @@ import { LOOKAHEAD_MS } from '../../src/store/settingsSlice';
 import { finishPractice } from '../../src/store/thunks';
 import { Button, Centered } from '../../src/ui/components';
 import { colors, radius, space, type } from '../../src/ui/theme';
+import { useImmersive } from '../../src/ui/useImmersive';
 import { useOrientation } from '../../src/ui/useOrientation';
 
 const SPEEDS = [50, 60, 75, 90, 100];
@@ -26,6 +27,7 @@ const CONTROLS = 96;
  */
 export default function PracticeScreen() {
   useOrientation('landscape');
+  useImmersive();
   const { chartId, songId, skillId } = useLocalSearchParams<{ chartId: string; songId: string; skillId?: string }>();
   const dispatch = useAppDispatch();
   const settings = useAppSelector((s) => s.settings);

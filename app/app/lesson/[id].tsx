@@ -19,6 +19,7 @@ import { finishSession } from '../../src/store/thunks';
 import type { SkillNodeDef } from '../../src/types/chart';
 import { Button, Centered, Hearts } from '../../src/ui/components';
 import { colors, radius, space, type } from '../../src/ui/theme';
+import { useImmersive } from '../../src/ui/useImmersive';
 import { useOrientation } from '../../src/ui/useOrientation';
 
 const TOP_BAR = 44;
@@ -27,6 +28,7 @@ const BOTTOM_BAR = 36;
 /** The 3-minute micro-session. Landscape, full-width highway, overlays for each phase. */
 export default function LessonScreen() {
   useOrientation('landscape');
+  useImmersive();
   const { id: lessonId, skillId } = useLocalSearchParams<{ id: string; skillId: string }>();
   const dispatch = useAppDispatch();
   const session = useAppSelector((s) => s.session);
