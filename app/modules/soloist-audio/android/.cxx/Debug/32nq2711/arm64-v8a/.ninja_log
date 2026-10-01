@@ -1,9 +1,0 @@
-# ninja log v5
-333	1252	8125762738490028	CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/OnsetDetector.cpp.o	d9f478dcc02f7f7c
-150	1261	8125762738540029	CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/Mixer.cpp.o	57f4270c33356731
-421	1326	8125762739245309	CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/PitchDetector.cpp.o	21aa70801ab6ea22
-1	1420	8125762740140581	CMakeFiles/soloistaudio.dir/src/main/cpp/OboeEngine.cpp.o	547407c15c704c60
-79	1438	8125762740300567	CMakeFiles/soloistaudio.dir/src/main/cpp/jni_bridge.cpp.o	1644f869e83b8395
-508	1698	8125762742954034	CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/WavLoader.cpp.o	4eb606e0dd96ee1d
-227	2140	8125762747265176	CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/AudioCore.cpp.o	128d0b9422850407
-2141	2463	8125762750357555	../../../../build/intermediates/cxx/Debug/32nq2711/obj/arm64-v8a/libsoloistaudio.so	c2e2424ca0e802a

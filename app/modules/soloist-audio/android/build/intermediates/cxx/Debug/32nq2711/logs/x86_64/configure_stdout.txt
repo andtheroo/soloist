@@ -1,9 +1,0 @@
--- The CXX compiler identification is Clang 18.0.2
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: C:/Users/sirle/AppData/Local/Android/Sdk/ndk/27.1.12297006/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Configuring done
--- Generating done
--- Build files have been written to: C:/dev/soloist/app/modules/soloist-audio/android/.cxx/Debug/32nq2711/x86_64

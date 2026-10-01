@@ -3,6 +3,8 @@ node_modules/
 ios/Pods/
 app/ios/
 app/android/
+app/modules/soloist-audio/android/.cxx/
+app/modules/soloist-audio/android/build/
 *.log
 server/public/
 server/data/
