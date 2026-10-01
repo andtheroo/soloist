@@ -104,12 +104,29 @@ export function Stat({ value, label, color = colors.text }: { value: string; lab
   );
 }
 
-export function Centered({ text, spinner, action }: { text: string; spinner?: boolean; action?: { label: string; onPress(): void } }) {
+type CenteredAction = { label: string; onPress(): void };
+
+export function Centered({
+  text,
+  spinner,
+  action,
+  secondary,
+}: {
+  text: string;
+  spinner?: boolean;
+  action?: CenteredAction;
+  secondary?: CenteredAction;
+}) {
   return (
     <View style={styles.centered}>
       {spinner && <ActivityIndicator color={colors.text} size="large" />}
-      <Text style={[type.body, { marginTop: space(3), textAlign: 'center' }]}>{text}</Text>
-      {action && <Button label={action.label} onPress={action.onPress} style={{ marginTop: space(4) }} />}
+      <Text style={[type.body, { marginTop: space(3), textAlign: 'center', maxWidth: 480 }]}>{text}</Text>
+      {(action || secondary) && (
+        <View style={{ flexDirection: 'row', gap: space(3), marginTop: space(4) }}>
+          {secondary && <Button label={secondary.label} variant="secondary" onPress={secondary.onPress} />}
+          {action && <Button label={action.label} onPress={action.onPress} />}
+        </View>
+      )}
     </View>
   );
 }

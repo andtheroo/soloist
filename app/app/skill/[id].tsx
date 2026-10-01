@@ -14,12 +14,22 @@ export default function SkillScreen() {
   const p = useAppSelector((s) => s.progression);
   const [course, setCourse] = useState<Course | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    loadCourse().then(setCourse).catch((e: Error) => setError(e.message));
-  }, []);
+    setError(null);
+    loadCourse(attempt > 0).then(setCourse).catch((e: Error) => setError(e.message));
+  }, [attempt]);
 
-  if (error) return <Centered text={error} action={{ label: 'Back', onPress: () => router.back() }} />;
+  if (error) {
+    return (
+      <Centered
+        text={error}
+        action={{ label: 'Retry', onPress: () => setAttempt((a) => a + 1) }}
+        secondary={{ label: 'Back', onPress: () => router.back() }}
+      />
+    );
+  }
   const skill = course?.skills.find((s) => s.id === id);
   if (!course || !skill) return <Centered spinner text="Loading skill…" />;
 

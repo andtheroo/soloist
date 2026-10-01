@@ -103,7 +103,9 @@ export default function PracticeScreen() {
   };
 
   if (engine.error) return <Centered text={engine.error} action={{ label: 'Try again', onPress: engine.retry }} />;
-  if (player.error) return <Centered text={player.error} action={{ label: 'Back', onPress: () => router.back() }} />;
+  if (player.error) {
+    return <Centered text={player.error} action={{ label: 'Retry', onPress: player.reload }} secondary={{ label: 'Back', onPress: () => router.back() }} />;
+  }
   if (!engine.ready || player.loading || !chart) return <Centered spinner text="Loading practice…" />;
 
   const last = passes[passes.length - 1];

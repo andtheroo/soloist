@@ -41,6 +41,7 @@ export default function LessonScreen() {
   const insets = useSafeAreaInsets();
   const [skill, setSkill] = useState<SkillNodeDef | null>(null);
   const [xp, setXp] = useState<XpBreakdown | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const exercise = selectCurrentExercise(session);
 
   // ---- load lesson ----
@@ -55,7 +56,7 @@ export default function LessonScreen() {
     return () => {
       dispatch(sessionActions.sessionReset());
     };
-  }, [dispatch, lessonId, skillId]);
+  }, [dispatch, lessonId, skillId, loadAttempt]);
 
   const grading = useMemo(() => {
     if (settings.gradingMode === 'relaxed') return LENIENT_GRADING;
@@ -120,8 +121,17 @@ export default function LessonScreen() {
 
   // ---------------------------------------------------------------- render
   if (engine.error) return <Centered text={engine.error} action={{ label: 'Try again', onPress: engine.retry }} />;
-  if (session.phase === 'error') return <Centered text={session.error ?? 'Something went wrong'} action={{ label: 'Back', onPress: () => router.back() }} />;
-  if (player.error) return <Centered text={player.error} action={{ label: 'Back', onPress: () => router.back() }} />;
+  const back = { label: 'Back', onPress: () => router.back() };
+  if (session.phase === 'error') {
+    return (
+      <Centered
+        text={session.error ?? 'Something went wrong'}
+        action={{ label: 'Retry', onPress: () => setLoadAttempt((a) => a + 1) }}
+        secondary={back}
+      />
+    );
+  }
+  if (player.error) return <Centered text={player.error} action={{ label: 'Retry', onPress: player.reload }} secondary={back} />;
   if (hearts <= 0 && session.results.length === 0 && session.phase === 'ready') {
     return (
       <Centered

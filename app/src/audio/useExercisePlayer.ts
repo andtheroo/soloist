@@ -167,5 +167,8 @@ export function useExercisePlayer(opts: Options) {
     [arm],
   );
 
-  return { chart, loading, error, clock, judgments, judgedAt, inputDb, play, pause, restart };
+  /** Retry a failed chart/stem download. */
+  const reload = useCallback(() => setLoadToken((t) => t + 1), []);
+
+  return { chart, loading, error, clock, judgments, judgedAt, inputDb, play, pause, restart, reload };
 }
