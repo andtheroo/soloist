@@ -84,6 +84,28 @@ int main() {
     CHECK(std::fabs(ms - 692 / 48.0) < 0.05, "paused position is frozen");
   }
 
+  // ---------------- 2b. Realistic callbacks: anchor republished every burst ----------------
+  // Regression: the audible frame always lags the latest anchor by the buffer latency, which
+  // used to select the *previous* anchor permanently (song frozen while playing, running
+  // while paused).
+  {
+    ClockMap c;
+    c.setRates(sr, sr);
+    const int64_t base = 1'000'000'000;
+    c.publishOutputTimestamp(0, base);
+    const int64_t lag = 2 * 192 + 480;  // buffer + device latency, in frames
+    int64_t out = 0, song = 0;
+    for (; out < 24000; out += 192) c.publishAnchor(out, song, false);  // paused 0.5 s
+    for (; out < 120000; out += 192, song += 192) c.publishAnchor(out, song, true);  // play 2 s
+    double ms; bool playing;
+    c.songMsAtHostNs(base + static_cast<int64_t>((out - lag) / sr * 1e9), ms, playing);
+    CHECK(playing && std::fabs(ms - (song - lag) / 48.0) < 0.05, "song advances while playing");
+    const int64_t pausedSong = song;
+    for (int i = 0; i < 250; ++i, out += 192) c.publishAnchor(out, song, false);  // pause 1 s
+    c.songMsAtHostNs(base + static_cast<int64_t>((out - lag) / sr * 1e9), ms, playing);
+    CHECK(!playing && std::fabs(ms - pausedSong / 48.0) < 0.05, "song stays put while paused");
+  }
+
   // ---------------- 3. Tuner ----------------
   {
     AudioCore core;

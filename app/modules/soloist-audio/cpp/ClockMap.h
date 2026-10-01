@@ -71,6 +71,10 @@ struct SongAnchor {
   int64_t prevSongFrame = 0;
   int32_t prevPlaying = 0;
   int32_t hasPrev = 0;
+  // Output frame of the first callback after that discontinuity. Only audio heard before
+  // this frame belongs to the previous anchor. (The anchor itself is republished every
+  // callback, so its outFrame is always ahead of what is audible — it can't be the boundary.)
+  int64_t jumpOutFrame = 0;
 };
 
 class ClockMap {
@@ -94,6 +98,7 @@ class ClockMap {
       a.prevSongFrame = a.songFrame;
       a.prevPlaying = a.playing;
       a.hasPrev = 1;
+      a.jumpOutFrame = outFrame;
     }
     a.outFrame = outFrame;
     a.songFrame = songFrame;
@@ -126,11 +131,11 @@ class ClockMap {
     if (!o.valid || !a.valid) return false;
     playing = a.playing != 0;
     const double outFrameAtT = o.frame + (hostNs - o.timeNs) * outRate_ / 1e9;
-    // Audio heard at T was written *before* the latest callback if outFrameAtT < a.outFrame.
-    // If a discontinuity happened in between, use the anchor that was valid back then.
+    // Audio heard at T that was written before the last discontinuity (seek, loop wrap,
+    // pause, resume) still belongs to the anchor that was valid back then.
     int64_t refOut = a.outFrame, refSong = a.songFrame;
     bool refPlaying = playing;
-    if (a.hasPrev && outFrameAtT < a.outFrame) {
+    if (a.hasPrev && outFrameAtT < a.jumpOutFrame) {
       refOut = a.prevOutFrame;
       refSong = a.prevSongFrame;
       refPlaying = a.prevPlaying != 0;

@@ -64,7 +64,9 @@ export default function SettingsScreen() {
       <SectionLabel>Feedback</SectionLabel>
       <Card style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={type.body}>Vibrate on wrong notes and new crowns</Text>
-        <Switch value={s.haptics} onValueChange={(v) => dispatch(settingsActions.hapticsSet(v))} />
+        <Switch value={s.haptics} onValueChange={(v) => {
+            dispatch(settingsActions.hapticsSet(v));
+          }} />
       </Card>
 
       <SectionLabel>Lesson server</SectionLabel>
