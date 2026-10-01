@@ -7,12 +7,15 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { setServerUrlOverride } from '../src/api/client';
+import { initPurchases } from '../src/api/purchases';
 import { toDayKey } from '../src/game/streak';
 import { persistor, store, useAppSelector } from '../src/store';
 import { progressionActions } from '../src/store/progressionSlice';
 import { Centered } from '../src/ui/components';
 import { colors } from '../src/ui/theme';
 import { useOrientation } from '../src/ui/useOrientation';
+
+initPurchases();
 
 /** Refill hearts and reconcile streaks after rehydration and on every foreground. */
 const reconcileDay = () => {

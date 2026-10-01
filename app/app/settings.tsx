@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../src/store';
 import { progressionActions } from '../src/store/progressionSlice';
 import { GradingMode, GuideMode, HighwaySpeed, settingsActions } from '../src/store/settingsSlice';
 import { Button, Card, SectionLabel, Segmented } from '../src/ui/components';
+import { ProCard } from '../src/ui/ProCard';
 import { ServerSetup } from '../src/ui/ServerSetup';
 import { colors, space, type } from '../src/ui/theme';
 
@@ -21,6 +22,9 @@ export default function SettingsScreen() {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.bg }} contentContainerStyle={{ padding: space(4), paddingBottom: space(20) }}>
+      <SectionLabel>Soloist Pro</SectionLabel>
+      <ProCard />
+
       <SectionLabel>Daily goal</SectionLabel>
       <Segmented
         options={DAILY_GOAL_OPTIONS.map((o) => ({ value: o.xp, label: o.label, hint: `${o.xp} XP` }))}
