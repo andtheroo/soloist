@@ -1,0 +1,3 @@
+C:/dev/soloist/app/modules/soloist-audio/android/.cxx/Debug/32nq2711/armeabi-v7a/CMakeFiles/soloistaudio.dir
+C:/dev/soloist/app/modules/soloist-audio/android/.cxx/Debug/32nq2711/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/dev/soloist/app/modules/soloist-audio/android/.cxx/Debug/32nq2711/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+C:\dev\soloist\app\modules\soloist-audio\android\.cxx\Debug\32nq2711\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\oboe\oboeConfig.cmake
+C:\dev\soloist\app\modules\soloist-audio\android\.cxx\Debug\32nq2711\prefab\arm64-v8a\prefab\lib\aarch64-linux-android\cmake\oboe\oboeConfigVersion.cmake
+C:\dev\soloist\app\modules\soloist-audio\android\CMakeLists.txt

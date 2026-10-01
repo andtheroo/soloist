@@ -1,0 +1,12 @@
+{
+  "name": "soloist-audio",
+  "version": "0.1.0",
+  "description": "Soloist low-latency audio engine (Oboe/AAudio on Android, AVAudioEngine on iOS, shared C++ core)",
+  "main": "index.ts",
+  "types": "index.ts",
+  "private": true,
+  "scripts": {
+    "test:core": "g++ -std=c++17 -O2 -Wall -Wextra -pthread -Icpp cpp/*.cpp cpp/tests/core_test.cpp -o /tmp/soloist_core_test && /tmp/soloist_core_test && g++ -std=c++17 -O2 -Wall -Wextra -pthread -Icpp cpp/*.cpp cpp/tests/feature_test.cpp -o /tmp/soloist_feature_test && /tmp/soloist_feature_test",
+    "test:e2e": "bash cpp/tests/run_e2e.sh"
+  }
+}

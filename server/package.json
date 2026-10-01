@@ -1,0 +1,15 @@
+{
+  "name": "soloist-mock-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zero-dependency mock API serving lessons, charts and isolated stems for Soloist",
+  "main": "src/index.js",
+  "scripts": {
+    "generate": "node scripts/generate-content.js",
+    "start": "node src/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

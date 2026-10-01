@@ -1,0 +1,8 @@
+node_modules/
+.expo/
+ios/Pods/
+app/ios/
+app/android/
+*.log
+server/public/
+server/data/

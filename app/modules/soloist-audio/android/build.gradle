@@ -1,0 +1,65 @@
+// Expo local module with a C++ (Oboe) core. Mirrors the Expo SDK 54 local-module template.
+// Requires a development build (`npx expo run:android` / EAS) — Expo Go cannot load custom native code.
+apply plugin: 'com.android.library'
+
+group = 'expo.modules.soloistaudio'
+version = '0.2.0'
+
+def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useExpoPublishing()
+
+buildscript {
+  ext.safeExtGet = { prop, fallback ->
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+  }
+}
+
+android {
+  namespace "expo.modules.soloistaudio"
+  compileSdkVersion safeExtGet("compileSdkVersion", 36)
+  // Same NDK as React Native itself, so no extra NDK download is needed.
+  ndkVersion safeExtGet("ndkVersion", "27.1.12297006")
+
+  defaultConfig {
+    minSdkVersion safeExtGet("minSdkVersion", 24)
+    targetSdkVersion safeExtGet("targetSdkVersion", 36)
+    versionCode 2
+    versionName "0.2.0"
+    // AAudio needs API 26 (27+ for MMAP). Oboe transparently falls back to OpenSL ES below that.
+    externalNativeBuild {
+      cmake {
+        cppFlags "-std=c++17"
+        arguments "-DANDROID_STL=c++_shared"
+      }
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "CMakeLists.txt"
+      version "3.22.1"
+    }
+  }
+
+  buildFeatures {
+    prefab true  // lets CMake find_package(oboe)
+  }
+
+  packaging {
+    jniLibs {
+      pickFirsts += ["**/liboboe.so", "**/libc++_shared.so"]
+    }
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+}
+
+dependencies {
+  // https://github.com/google/oboe/releases
+  implementation "com.google.oboe:oboe:1.9.3"
+}

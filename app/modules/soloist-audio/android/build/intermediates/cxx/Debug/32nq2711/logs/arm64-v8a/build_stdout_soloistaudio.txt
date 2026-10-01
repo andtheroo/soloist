@@ -1,0 +1,9 @@
+ninja: Entering directory `C:\dev\soloist\app\modules\soloist-audio\android\.cxx\Debug\32nq2711\arm64-v8a'
+[1/8] Building CXX object CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/OnsetDetector.cpp.o
+[2/8] Building CXX object CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/Mixer.cpp.o
+[3/8] Building CXX object CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/PitchDetector.cpp.o
+[4/8] Building CXX object CMakeFiles/soloistaudio.dir/src/main/cpp/OboeEngine.cpp.o
+[5/8] Building CXX object CMakeFiles/soloistaudio.dir/src/main/cpp/jni_bridge.cpp.o
+[6/8] Building CXX object CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/WavLoader.cpp.o
+[7/8] Building CXX object CMakeFiles/soloistaudio.dir/C_/dev/soloist/app/modules/soloist-audio/cpp/AudioCore.cpp.o
+[8/8] Linking CXX shared library ..\..\..\..\build\intermediates\cxx\Debug\32nq2711\obj\arm64-v8a\libsoloistaudio.so

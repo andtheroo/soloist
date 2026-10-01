@@ -1,0 +1,10 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["SoloistAudioModule"],
+    "podspecPath": "SoloistAudio.podspec"
+  },
+  "android": {
+    "modules": ["expo.modules.soloistaudio.SoloistAudioModule"]
+  }
+}
