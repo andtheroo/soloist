@@ -147,7 +147,7 @@ The app walks you through:
 3. **Server.** This should say ✓ Connected. If it doesn't, type the address the server printed.
 4. **Microphone.** Tap Allow. The audio is analysed on the phone and never recorded or uploaded.
 5. **Tune up.** Use the built-in tuner (E A D G B E).
-6. **Latency check (20 s).** Unplug headphones, turn the volume up and stay quiet. This measures your phone's exact
+6. **Latency check (10 s).** Unplug headphones, turn the volume up and stay quiet. This measures your phone's exact
    audio delay so grading is fair. You can redo it any time from Settings.
 
 ### Tips for good detection

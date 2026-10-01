@@ -46,7 +46,7 @@ export function useSoloistEngine(): EngineState {
           warnings.push('Tip: headphones stop the backing track leaking into the mic.');
         if (report.platform === 'android' && report.audioApi !== 'AAudio')
           warnings.push('This phone uses the legacy audio path; timing is calibrated but feedback may feel slower.');
-        if (calibration === null) warnings.push('Run the 20-second latency check (Settings) for the most accurate grading.');
+        if (calibration === null) warnings.push('Run the 10-second latency check (Settings) for the most accurate grading.');
         setState({ ready: true, report, error: null, warnings });
       })
       .catch((e: Error) => alive && setState((s) => ({ ...s, ready: false, error: e.message })));

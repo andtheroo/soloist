@@ -49,10 +49,14 @@ export function CalibrationView({
       SoloistAudio.setExpectedNotes([]);
       const detected: number[] = [];
       SoloistAudio.play();
+      // Watchdog: if playback never reports the end (audio route change, stalled stream),
+      // finish anyway with whatever was heard instead of listening forever.
+      const deadline = Date.now() + chart.durationMs + 4000;
       const loop = () => {
         const snap = SoloistAudio.poll();
         for (const e of snap.events) detected.push(e.songMs);
-        if (snap.ended) {
+        if (snap.ended || Date.now() > deadline) {
+          SoloistAudio.pause();
           raf.current = null;
           SoloistAudio.setCalibrationOffsetMs(currentOffsetMs ?? 0); // restore until saved
           setResult(estimateCalibration(chart.notes.map((n) => n.timeMs), detected, 0));
@@ -88,9 +92,15 @@ export function CalibrationView({
           <Text style={[type.h2, { color: result.reliable ? colors.accent : colors.orange }]}>
             {result.reliable
               ? `Measured offset: ${result.offsetMs.toFixed(1)} ms (±${result.spreadMs.toFixed(1)})`
-              : 'Too noisy to measure — try a quieter room or turn the volume up.'}
+              : "Couldn't hear the clicks clearly."}
           </Text>
           <Text style={[type.small, { marginTop: 4 }]}>{result.samples} of 16 clicks heard</Text>
+          {!result.reliable && (
+            <Text style={[type.body, { marginTop: space(2) }]}>
+              Unplug headphones, turn the volume up and try again in a quieter room. Or skip: lessons still work using
+              your phone's own latency figures, and you can rerun this from Settings.
+            </Text>
+          )}
         </Card>
       )}
       <View style={{ flexDirection: 'row', gap: space(3), flexWrap: 'wrap' }}>

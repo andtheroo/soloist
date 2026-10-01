@@ -24,6 +24,7 @@ export default function CalibrateScreen() {
           dispatch(settingsActions.calibrationSaved(ms));
           router.back();
         }}
+        onSkip={() => router.back()}
       />
     </ScrollView>
   );
